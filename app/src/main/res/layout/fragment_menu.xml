@@ -21,7 +21,7 @@
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="btn2"
-        app:layout_constraintStart_toStartOf="@id/bnt1"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/bnt1"
         app:layout_constraintEnd_toStartOf="@id/bnt4"
         app:layout_constraintBottom_toTopOf="@id/bnt3"/>
@@ -30,7 +30,7 @@
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="btn3"
-        app:layout_constraintStart_toStartOf="@id/bnt1"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/bnt2"
         app:layout_constraintEnd_toStartOf="@id/bnt4"
         app:layout_constraintBottom_toBottomOf="parent"/>
