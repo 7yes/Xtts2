@@ -4,4 +4,6 @@ import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
-class Xtts2app:Application()
+class Xtts2app:Application(){
+    //
+}
