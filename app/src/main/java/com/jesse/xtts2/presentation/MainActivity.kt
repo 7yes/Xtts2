@@ -31,7 +31,7 @@ import java.util.Locale
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-       private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
     private var speechRecognizer: SpeechRecognizer? = null
     private var recognizerIntent: Intent? = null
     private var selectedLanguage = "en" // Default "en selected"
@@ -40,12 +40,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView ( binding.root )
+        setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
         setListeners()
         checkPermissions()
         resetSpeechRecognizer()
@@ -87,10 +88,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun setRecogniserIntent() {
         recognizerIntent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
-        recognizerIntent!!.putExtra(
-            RecognizerIntent.EXTRA_LANGUAGE_PREFERENCE,
-            selectedLanguage
-        )
+//        recognizerIntent!!.putExtra(
+//            RecognizerIntent.EXTRA_LANGUAGE_PREFERENCE,
+//            selectedLanguage
+//        )
         recognizerIntent!!.putExtra(
             RecognizerIntent.EXTRA_LANGUAGE,
             selectedLanguage
@@ -148,7 +149,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun prepareLocales() {
         val availableLocales =
-            Locale.getAvailableLocales() //Alternatively you can check https://cloud.google.com/speech-to-text/docs/speech-to-text-supported-languages
+            Locale.getAvailableLocales().filter { it.toString().equals("en") || it.toString().equals("es") }
+        //Alternatively you can check https://cloud.google.com/speech-to-text/docs/speech-to-text-supported-languages
 
         val adapterLocalization: ArrayAdapter<Any?> = ArrayAdapter<Any?>(
             this,
@@ -164,7 +166,6 @@ class MainActivity : AppCompatActivity() {
                 id: Long
             ) {
                 selectedLanguage = availableLocales[position].toString()
-
                 resetSpeechRecognizer()
                 setRecogniserIntent()
             }
@@ -175,15 +176,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.spinner1.adapter = adapterLocalization
-
-        // Set "en" as selected language by default
-        for (i in availableLocales.indices) {
-            val locale = availableLocales[i]
-            if (locale.toString().equals("en", true)) {
-                binding.spinner1.setSelection(i)
-                break
-            }
-        }
+        binding.spinner1.setSelection(0) // language set to "en"
     }
 
     private val mRecognitionListener = object : RecognitionListener {

@@ -3,11 +3,11 @@ package com.jesse.xtts2.core
 import android.speech.SpeechRecognizer
 import android.util.Log
 
-const val LOG_TAG = "TAJ"
+const val LOG_TAG = "tts"
 const val PERMISSIONS_REQUEST_RECORD_AUDIO = 100
 const val RESULTS_LIMIT = 1
 
-const val IS_CONTINUES_LISTEN = true
+var IS_CONTINUES_LISTEN = true
 
 fun errorLog(msg: String?) {
     Log.e(LOG_TAG, msg!!)
