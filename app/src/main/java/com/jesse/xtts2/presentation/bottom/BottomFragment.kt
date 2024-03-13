@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.jesse.xtts2.databinding.FragmentBottomBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class BottomFragment : Fragment() {
     private var _binding: FragmentBottomBinding? = null
        private val binding get() = _binding!!
