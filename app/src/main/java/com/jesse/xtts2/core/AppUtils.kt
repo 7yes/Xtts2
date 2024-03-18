@@ -9,6 +9,25 @@ const val RESULTS_LIMIT = 1
 
 var IS_CONTINUES_LISTEN = true
 
+object Victory{
+    private var grammar = listOf("605","okay")
+    private var state :UiVictoryState = UiVictoryState.Login
+    fun checkGrammar(text:String, screenNow: UiVictoryState):UiVictoryState{
+       val data = text.split(" ")
+        var screen = screenNow
+        if(data.size==3)
+        {
+            if(data[0]== grammar[0] && data[1]== grammar[1])
+                screen = UiVictoryState.MainMenu
+        }
+        return screen
+    }
+}
+
+sealed class UiVictoryState{
+    data object Login:UiVictoryState()
+    data object MainMenu:UiVictoryState()
+}
 fun errorLog(msg: String?) {
     Log.e(LOG_TAG, msg!!)
 }

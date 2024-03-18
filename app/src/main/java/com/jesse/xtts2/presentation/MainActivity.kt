@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.speech.RecognitionListener
 import android.speech.RecognizerIntent
 import android.speech.SpeechRecognizer
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -19,10 +20,13 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.navigation.findNavController
 import com.jesse.xtts2.R
 import com.jesse.xtts2.core.IS_CONTINUES_LISTEN
 import com.jesse.xtts2.core.PERMISSIONS_REQUEST_RECORD_AUDIO
 import com.jesse.xtts2.core.RESULTS_LIMIT
+import com.jesse.xtts2.core.UiVictoryState
+import com.jesse.xtts2.core.Victory
 import com.jesse.xtts2.core.errorLog
 import com.jesse.xtts2.core.getErrorText
 import com.jesse.xtts2.databinding.ActivityMainBinding
@@ -52,9 +56,10 @@ class MainActivity : AppCompatActivity() {
         resetSpeechRecognizer()
         setRecogniserIntent()
         prepareLocales()
+       // binding.btnStart.text = binding.btnStart.textOn
         audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
         audioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, 0, 0)
-    }
+      }
 
     private fun setListeners() {
         binding.btnStart.setOnClickListener {
@@ -208,10 +213,17 @@ class MainActivity : AppCompatActivity() {
                 .getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)
             var text = ""
             for (result in matches!!) text += """
-     $result
-     
+     $result 
      """.trimIndent()
             binding.textView1.text = text
+            Log.d("TAG", "onResults: text $text ")
+            var state =Victory.checkGrammar(text, UiVictoryState.Login)
+           if(state!=UiVictoryState.Login){
+               when(state){
+                   UiVictoryState.Login -> {}
+                   UiVictoryState.MainMenu ->   binding.bodyContainer.findNavController().navigate(R.id.action_loginFragment_to_menuFragment)
+               }
+           }
             if (IS_CONTINUES_LISTEN) {
                 startListening()
             } else {

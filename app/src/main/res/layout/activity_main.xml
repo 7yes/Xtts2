@@ -10,6 +10,7 @@
 
     <ToggleButton
         android:id="@+id/btnStart"
+        android:checked="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
