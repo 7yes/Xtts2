@@ -8,13 +8,14 @@
     android:background="@color/background"
     tools:context=".presentation.MainActivity">
 
-        <Button
-            android:id="@+id/btnStartListen"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/spinner1"
-            android:text="Start " />
+    <ToggleButton
+        android:id="@+id/btnStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/spinner1"
+        android:text="Start"/>
+
         <Spinner
             android:id="@+id/spinner1"
             app:layout_constraintTop_toTopOf="parent"
@@ -56,9 +57,10 @@
         android:padding="8dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello"
+        style="@style/mSubtitle"
+        android:text="Victory Voice"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/progressBar1"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/bodyContainer"/>
 
     <androidx.fragment.app.FragmentContainerView

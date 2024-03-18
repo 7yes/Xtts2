@@ -57,8 +57,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setListeners() {
-        binding.btnStartListen.setOnClickListener {
-            startListening()
+        binding.btnStart.setOnClickListener {
+            when (binding.btnStart.text) {
+                "ON" -> startListening()
+                else -> {
+                    resetSpeechRecognizer()
+                }
+            }
         }
     }
 
@@ -149,7 +154,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun prepareLocales() {
         val availableLocales =
-            Locale.getAvailableLocales().filter { it.toString().equals("en") || it.toString().equals("es") }
+            Locale.getAvailableLocales()
+                .filter { it.toString().equals("en") || it.toString().equals("es") }
         //Alternatively you can check https://cloud.google.com/speech-to-text/docs/speech-to-text-supported-languages
 
         val adapterLocalization: ArrayAdapter<Any?> = ArrayAdapter<Any?>(

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="mSubtitle">mSubtitle
+        <item name="android:textSize">24sp</item>
+        <item name="badgeTextColor">@color/onbackground</item>
+    </style>
+    <style name="mTitle">mTitle
+        <item name="android:textSize">32sp</item>
+        <item name="badgeTextColor">@color/onbackground</item>
+    </style>
+    <style name="mLabel">mTitle
+        <item name="android:textSize">18sp</item>
+        <item name="badgeTextColor">@color/onbackground</item>
+    </style>
+</resources>

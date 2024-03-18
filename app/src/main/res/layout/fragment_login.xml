@@ -12,12 +12,13 @@
         android:id="@+id/tvLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        style="@style/mSubtitle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintVertical_chainStyle="spread"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/etLogin"
-        android:text="@string/hello_blank_fragment" />
+        android:text="Operator ID" />
 
     <EditText
         android:layout_width="200dp"

@@ -10,17 +10,18 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        style="@style/mLabel"
         android:layout_gravity="top"
-        android:text="text top" />
+        android:text="Operator ID: " />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:text="text bottom" />
+        style="@style/mLabel"
+        android:text="last Response: " />
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Qui"
+        android:text="Quit"
         android:layout_gravity="end"/>
-
 </FrameLayout>
