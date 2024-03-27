@@ -39,7 +39,7 @@ object Victory {
 enum class Screen { A0, B0, C0, LOGIN }
 sealed class UiVictoryState {
     data object Login : UiVictoryState()
-    data class MainMenu(val template: Screen, val title:String, val options:List<String>) : UiVictoryState()
+    data class TemplateA0(val template: Screen, val title:String, val options:List<String>) : UiVictoryState()
 }
 
 fun errorLog(msg: String?) {

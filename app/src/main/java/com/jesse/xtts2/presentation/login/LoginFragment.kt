@@ -22,7 +22,7 @@ class LoginFragment : Fragment() {
     ): View {
         _binding = FragmentLoginBinding.inflate(layoutInflater, container, false)
         binding.etLogin.setOnEditorActionListener { input, actionId, event ->
-            Log.d("TAJ", "onCreateView:  btn ${input.text}")
+            Log.d("TAJ", "onCreateView: from  btn: ${input.text}")
            viewmodel.sendData("${input.text} okay")
            // Victory.updateState(Server.getData("${input.text} okay"))
             false

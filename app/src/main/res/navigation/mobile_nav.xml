@@ -12,10 +12,18 @@
         <action
             android:id="@+id/action_loginFragment_to_menuFragment"
             app:destination="@id/menuFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_templaA0Fragment"
+            app:destination="@id/templaA0Fragment" />
     </fragment>
     <fragment
         android:id="@+id/menuFragment"
         android:name="com.jesse.xtts2.presentation.menu.MenuFragment"
         android:label="fragment_menu"
         tools:layout="@layout/fragment_menu" />
+    <fragment
+        android:id="@+id/templaA0Fragment"
+        android:name="com.jesse.xtts2.presentation.templates.TemplaA0Fragment"
+        android:label="fragment_templa_a0"
+        tools:layout="@layout/fragment_templa_a0" />
 </navigation>

@@ -17,13 +17,13 @@ object Server {
         Log.d("TAJ", "checkInput: X$text,XX")
         val response = when (text) {
             "405 okay " -> {
-                UiVictoryState.MainMenu(Screen.A0,"Select a Task", listOf("Repack Pick","Cart Picking", "Break"))
+                UiVictoryState.TemplateA0(Screen.A0,"Select a Task", listOf("Repack Pick","Cart Picking", "Break"))
             }
             else -> null
         }
         isFree = true
         //TODO()
-        Log.i("TAJ", "response $response ", )
+        Log.i("TAJ", "response send it in server: $response ", )
         return response
     }
 }

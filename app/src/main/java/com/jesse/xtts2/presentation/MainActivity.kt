@@ -25,10 +25,12 @@ import com.jesse.xtts2.R
 import com.jesse.xtts2.core.IS_CONTINUES_LISTEN
 import com.jesse.xtts2.core.PERMISSIONS_REQUEST_RECORD_AUDIO
 import com.jesse.xtts2.core.RESULTS_LIMIT
+import com.jesse.xtts2.core.UiVictoryState
 import com.jesse.xtts2.core.Victory
 import com.jesse.xtts2.core.errorLog
 import com.jesse.xtts2.core.getErrorText
 import com.jesse.xtts2.databinding.ActivityMainBinding
+import com.jesse.xtts2.presentation.templates.TemplaA0Fragment
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Locale
 
@@ -60,6 +62,26 @@ class MainActivity : AppCompatActivity() {
         // binding.btnStart.text = binding.btnStart.textOn
         audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
         audioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, 0, 0)
+        viewmodel.uiStated.observe(this) {
+            navigateTo(it)
+        }
+    }
+
+    private fun navigateTo(newUiState: UiVictoryState?) {
+        if (newUiState != null) stopListener()
+        Log.e("TAJ", "onCreate:  aqui $newUiState", )
+        when (newUiState) {
+            UiVictoryState.Login -> {
+                Log.e("TAG", "navigateTo:  Login", )
+            }
+
+            is UiVictoryState.TemplateA0 -> {
+                Log.e("TAG", "navigateTo:  TemplateA0", )
+               supportFragmentManager.beginTransaction().add(R.id.bodyContainer,TemplaA0Fragment()).commitNow()
+            }
+
+            null -> {}
+        }
     }
 
     private fun setListeners() {
@@ -152,11 +174,14 @@ class MainActivity : AppCompatActivity() {
     override fun onStop() {
         errorLog("stop")
         super.onStop()
+        stopListener()
+    }
+
+    private fun stopListener() {
         if (speechRecognizer != null) {
             speechRecognizer!!.destroy()
         }
     }
-
 
     private fun prepareLocales() {
         val availableLocales =
@@ -221,9 +246,7 @@ class MainActivity : AppCompatActivity() {
             val isValidInput = Victory.checkGrammar(text)
             if (isValidInput) {
                 viewmodel.sendData(text)
-               // Victory.updateState(Server.getData(text))
             }
-
 
             if (IS_CONTINUES_LISTEN) {
                 startListening()
