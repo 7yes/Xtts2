@@ -19,7 +19,7 @@ object Victory {
     }
 
     fun checkGrammar(text: String): Boolean {
-        Log.d("TAJ", "checkGrammar: $text")
+        Log.d("TAJ", "get in checkGrammar: $text")
         val words = text.split(" ")
         val countWords = words.size - 1
        return  when (countWords) {

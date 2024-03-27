@@ -14,13 +14,16 @@ object Server {
 
     private fun checkInput(text: String): UiVictoryState? {
         isFree = false
-        Log.i("TAJ", "checkInput: $text")
+        Log.d("TAJ", "checkInput: X$text,XX")
         val response = when (text) {
-            "405 okay" -> UiVictoryState.MainMenu(Screen.A0,"Select a Task", listOf("Repack Pick","Cart Picking", "Break"))
+            "405 okay " -> {
+                UiVictoryState.MainMenu(Screen.A0,"Select a Task", listOf("Repack Pick","Cart Picking", "Break"))
+            }
             else -> null
         }
         isFree = true
         //TODO()
+        Log.i("TAJ", "response $response ", )
         return response
     }
 }

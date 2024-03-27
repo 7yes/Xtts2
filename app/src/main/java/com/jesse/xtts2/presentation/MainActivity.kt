@@ -15,6 +15,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -38,6 +39,7 @@ class MainActivity : AppCompatActivity() {
     private var recognizerIntent: Intent? = null
     private var selectedLanguage = "en" // Default "en selected"
     private lateinit var audioManager: AudioManager
+    private val viewmodel: VictoryVM by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,10 +57,10 @@ class MainActivity : AppCompatActivity() {
         resetSpeechRecognizer()
         setRecogniserIntent()
         prepareLocales()
-       // binding.btnStart.text = binding.btnStart.textOn
+        // binding.btnStart.text = binding.btnStart.textOn
         audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
         audioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, 0, 0)
-      }
+    }
 
     private fun setListeners() {
         binding.btnStart.setOnClickListener {
@@ -215,12 +217,12 @@ class MainActivity : AppCompatActivity() {
      $result 
      """.trimIndent()
             binding.textView1.text = text
-            Log.d("TAG", "onResults: text $text ")
-            val isValidInput =Victory.checkGrammar(text)
-           if(isValidInput) {
-
-               Victory.updateState(Server.getData(text))
-           }
+            Log.d("TAJ", "onResults: text $text ")
+            val isValidInput = Victory.checkGrammar(text)
+            if (isValidInput) {
+                viewmodel.sendData(text)
+               // Victory.updateState(Server.getData(text))
+            }
 
 
             if (IS_CONTINUES_LISTEN) {

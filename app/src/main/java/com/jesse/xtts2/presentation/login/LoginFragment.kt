@@ -6,15 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.jesse.xtts2.core.Victory
+import androidx.fragment.app.activityViewModels
 import com.jesse.xtts2.databinding.FragmentLoginBinding
-import com.jesse.xtts2.presentation.Server
+import com.jesse.xtts2.presentation.VictoryVM
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
+    private val viewmodel:VictoryVM by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -22,7 +23,8 @@ class LoginFragment : Fragment() {
         _binding = FragmentLoginBinding.inflate(layoutInflater, container, false)
         binding.etLogin.setOnEditorActionListener { input, actionId, event ->
             Log.d("TAJ", "onCreateView:  btn ${input.text}")
-            Victory.updateState(Server.getData("${input.text} okay"))
+           viewmodel.sendData("${input.text} okay")
+           // Victory.updateState(Server.getData("${input.text} okay"))
             false
         }
         return binding.root
