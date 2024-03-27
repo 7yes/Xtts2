@@ -5,9 +5,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class LoginVM @Inject constructor(): ViewModel() {
+class LoginVM @Inject constructor() : ViewModel() {
+    fun sendData(text: String) {
 
-    fun login(input:String):Boolean{
-        return input.toInt()==605
     }
 }

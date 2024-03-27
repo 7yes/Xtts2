@@ -9,25 +9,39 @@ const val RESULTS_LIMIT = 1
 
 var IS_CONTINUES_LISTEN = true
 
-object Victory{
-    private var grammar = listOf("605","okay")
-    private var state :UiVictoryState = UiVictoryState.Login
-    fun checkGrammar(text:String, screenNow: UiVictoryState):UiVictoryState{
-       val data = text.split(" ")
-        var screen = screenNow
-        if(data.size==3)
-        {
-            if(data[0]== grammar[0] && data[1]== grammar[1])
-                screen = UiVictoryState.MainMenu
-        }
-        return screen
+object Victory {
+    private var grammar = listOf("okay")
+    private var state: UiVictoryState = UiVictoryState.Login
+
+    fun updateState(newState: UiVictoryState?) {
+
+
+    }
+
+    fun checkGrammar(text: String): Boolean {
+        Log.d("TAJ", "checkGrammar: $text")
+        val words = text.split(" ")
+        val countWords = words.size - 1
+       return  when (countWords) {
+            1 -> {
+                Log.d("TAJ", "checkGrammar:  fue 1 $text")
+                true
+            }
+            2 -> {
+                Log.d("TAJ", "checkGrammar:  fue 2 ${words[0]} + ${words[1]}")
+                 (words[1] == "okay")
+            }
+           else -> false
+       }
     }
 }
 
-sealed class UiVictoryState{
-    data object Login:UiVictoryState()
-    data object MainMenu:UiVictoryState()
+enum class Screen { A0, B0, C0, LOGIN }
+sealed class UiVictoryState {
+    data object Login : UiVictoryState()
+    data class MainMenu(val template: Screen, val title:String, val options:List<String>) : UiVictoryState()
 }
+
 fun errorLog(msg: String?) {
     Log.e(LOG_TAG, msg!!)
 }

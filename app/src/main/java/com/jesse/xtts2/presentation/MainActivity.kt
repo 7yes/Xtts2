@@ -20,12 +20,10 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.navigation.findNavController
 import com.jesse.xtts2.R
 import com.jesse.xtts2.core.IS_CONTINUES_LISTEN
 import com.jesse.xtts2.core.PERMISSIONS_REQUEST_RECORD_AUDIO
 import com.jesse.xtts2.core.RESULTS_LIMIT
-import com.jesse.xtts2.core.UiVictoryState
 import com.jesse.xtts2.core.Victory
 import com.jesse.xtts2.core.errorLog
 import com.jesse.xtts2.core.getErrorText
@@ -40,6 +38,7 @@ class MainActivity : AppCompatActivity() {
     private var recognizerIntent: Intent? = null
     private var selectedLanguage = "en" // Default "en selected"
     private lateinit var audioManager: AudioManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -217,13 +216,13 @@ class MainActivity : AppCompatActivity() {
      """.trimIndent()
             binding.textView1.text = text
             Log.d("TAG", "onResults: text $text ")
-            var state =Victory.checkGrammar(text, UiVictoryState.Login)
-           if(state!=UiVictoryState.Login){
-               when(state){
-                   UiVictoryState.Login -> {}
-                   UiVictoryState.MainMenu ->   binding.bodyContainer.findNavController().navigate(R.id.action_loginFragment_to_menuFragment)
-               }
+            val isValidInput =Victory.checkGrammar(text)
+           if(isValidInput) {
+
+               Victory.updateState(Server.getData(text))
            }
+
+
             if (IS_CONTINUES_LISTEN) {
                 startListening()
             } else {
