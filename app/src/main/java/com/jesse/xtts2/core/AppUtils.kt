@@ -10,11 +10,20 @@ const val RESULTS_LIMIT = 1
 var IS_CONTINUES_LISTEN = true
 
 object Victory {
-    private var grammar = listOf("okay")
-    private var state: UiVictoryState = UiVictoryState.Login
+    private var currentTemplate: Screen = Screen.A0
+     var currentTitle  = "Title"
+     var currentOptions= listOf("","")
+    private var currentGrammar= listOf("","")
 
-    fun updateState(newState: UiVictoryState?) {
-
+    fun updateState(newUiState: UiVictoryState) {
+     when(newUiState){
+         UiVictoryState.Login -> TODO()
+         is UiVictoryState.TemplateA0 -> {
+             currentTitle = newUiState.title
+             currentTemplate = newUiState.template
+             currentOptions = newUiState.options
+         }
+     }
 
     }
 
@@ -22,24 +31,27 @@ object Victory {
         Log.d("TAJ", "get in checkGrammar: $text")
         val words = text.split(" ")
         val countWords = words.size - 1
-       return  when (countWords) {
+        return when (countWords) {
             1 -> {
-                Log.d("TAJ", "checkGrammar:  fue 1 $text")
+
                 true
             }
+
             2 -> {
                 Log.d("TAJ", "checkGrammar:  fue 2 ${words[0]} + ${words[1]}")
-                 (words[1] == "okay")
+                (words[1] == "okay")
             }
-           else -> false
-       }
+
+            else -> false
+        }
     }
 }
 
 enum class Screen { A0, B0, C0, LOGIN }
 sealed class UiVictoryState {
     data object Login : UiVictoryState()
-    data class TemplateA0(val template: Screen, val title:String, val options:List<String>) : UiVictoryState()
+    data class TemplateA0(val template: Screen, val title: String, val options: List<String>) :
+        UiVictoryState()
 }
 
 fun errorLog(msg: String?) {

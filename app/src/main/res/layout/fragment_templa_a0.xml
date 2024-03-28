@@ -3,12 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/purple"
-    tools:context=".presentation.templates.TemplaA0Fragment">
+    android:background="@color/purple_200"
+    tools:context=".presentation.templates.tema.TemplaA0Fragment">
 
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/rvTemA">
+    </androidx.recyclerview.widget.RecyclerView>
 
 </FrameLayout>

@@ -30,7 +30,7 @@ import com.jesse.xtts2.core.Victory
 import com.jesse.xtts2.core.errorLog
 import com.jesse.xtts2.core.getErrorText
 import com.jesse.xtts2.databinding.ActivityMainBinding
-import com.jesse.xtts2.presentation.templates.TemplaA0Fragment
+import com.jesse.xtts2.presentation.templates.tema.TemplaA0Fragment
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Locale
 
@@ -69,18 +69,21 @@ class MainActivity : AppCompatActivity() {
 
     private fun navigateTo(newUiState: UiVictoryState?) {
         if (newUiState != null) stopListener()
-        Log.e("TAJ", "onCreate:  aqui $newUiState", )
+        Log.d("TAJ", "onCreate navigateTos0:  aqui $newUiState", )
         when (newUiState) {
             UiVictoryState.Login -> {
-                Log.e("TAG", "navigateTo:  Login", )
+                Log.d("TAJ", "navigateTos1:  Login:", )
             }
 
             is UiVictoryState.TemplateA0 -> {
-                Log.e("TAG", "navigateTo:  TemplateA0", )
-               supportFragmentManager.beginTransaction().add(R.id.bodyContainer,TemplaA0Fragment()).commitNow()
+
+                Log.d("TAJ", "navigateTos2:  TemplateA0:", )
+                Victory.updateState(newUiState)
+                binding.title.text = Victory.currentTitle
+               supportFragmentManager.beginTransaction().add(R.id.bodyContainer, TemplaA0Fragment()).commitNow()
             }
 
-            null -> {}
+            null -> { Log.e("TAG", "navigateTos3:  null:", )}
         }
     }
 

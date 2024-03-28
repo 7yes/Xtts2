@@ -23,7 +23,7 @@
         tools:layout="@layout/fragment_menu" />
     <fragment
         android:id="@+id/templaA0Fragment"
-        android:name="com.jesse.xtts2.presentation.templates.TemplaA0Fragment"
+        android:name="com.jesse.xtts2.presentation.templates.tema.TemplaA0Fragment"
         android:label="fragment_templa_a0"
         tools:layout="@layout/fragment_templa_a0" />
 </navigation>
