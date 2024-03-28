@@ -6,10 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.jesse.xtts2.core.Victory
 import com.jesse.xtts2.databinding.FragmentTemplaA0Binding
+import com.jesse.xtts2.presentation.VictoryVM
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -19,6 +20,7 @@ class TemplaA0Fragment : Fragment() {
 
     private lateinit var adapter: TemAAdapter
     private var listAdapter = mutableListOf<String>()
+    private val viewmodel: VictoryVM by activityViewModels()
 
 
     override fun onCreateView(
@@ -27,15 +29,20 @@ class TemplaA0Fragment : Fragment() {
     ): View {
         _binding = FragmentTemplaA0Binding.inflate(layoutInflater, container, false)
         initRV()
-
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewmodel.shouldListen(true)
+    }
+
     private fun initRV() {
-        adapter = TemAAdapter(listAdapter){
-            Toast.makeText(requireContext(), "$it", Toast.LENGTH_SHORT).show()
+        adapter = TemAAdapter(listAdapter) {
+            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+            viewmodel.sendData(it)
         }
-        binding.rvTemA.layoutManager = GridLayoutManager(requireContext(),2)
+        binding.rvTemA.layoutManager = GridLayoutManager(requireContext(), 2)
         binding.rvTemA.adapter = adapter
 
         listAdapter.clear()

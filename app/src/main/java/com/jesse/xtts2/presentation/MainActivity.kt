@@ -65,10 +65,20 @@ class MainActivity : AppCompatActivity() {
         viewmodel.uiStated.observe(this) {
             navigateTo(it)
         }
+        viewmodel.listening.observe(this){
+            when(it){
+                true -> { resetSpeechRecognizer()
+                    if (IS_CONTINUES_LISTEN) {
+                        startListening()
+                    }}
+                false -> stopListener()
+            }
+            Toast.makeText(this, viewmodel.listening.value.toString(), Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun navigateTo(newUiState: UiVictoryState?) {
-        if (newUiState != null) stopListener()
+        if (newUiState != null) viewmodel.shouldListen(false)
         Log.d("TAJ", "onCreate navigateTos0:  aqui $newUiState", )
         when (newUiState) {
             UiVictoryState.Login -> {
@@ -89,12 +99,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setListeners() {
         binding.btnStart.setOnClickListener {
-            when (binding.btnStart.text) {
-                "ON" -> startListening()
-                else -> {
-                    resetSpeechRecognizer()
-                }
-            }
+            viewmodel.shouldListen(!viewmodel.listening.value!!)
         }
     }
 
