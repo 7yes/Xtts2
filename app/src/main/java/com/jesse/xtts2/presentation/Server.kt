@@ -17,7 +17,7 @@ object Server {
         Log.d("TAJ", "checkInput: X$text,XX")
         val response = when (text) {
             "405 okay " -> {
-                UiVictoryState.TemplateA0(Screen.A0,"Select a Task", listOf("Repack Pick","Cart Picking", "Break","Meeting","Cleaning"))
+                UiVictoryState.TemplateA0(Screen.A0,"Select a Task", listOf("Repack Pick","Cart Picking","Shubba","pizza","apple","whatever","lalssagna"))
             }
             else -> null
         }

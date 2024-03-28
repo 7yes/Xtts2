@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -26,16 +27,14 @@ class TemplaA0Fragment : Fragment() {
     ): View {
         _binding = FragmentTemplaA0Binding.inflate(layoutInflater, container, false)
         initRV()
+
         return binding.root
     }
 
     private fun initRV() {
-        adapter = TemAAdapter(listAdapter)
-//            {
-//            //    viewmodel.updateDetail(it)
-//            //    findNavController().navigate(R.id.action_homeFragment_to_detailFragment)
-//            }
-      //  binding.rvTemA.layoutManager = LinearLayoutManager(requireContext())
+        adapter = TemAAdapter(listAdapter){
+            Toast.makeText(requireContext(), "$it", Toast.LENGTH_SHORT).show()
+        }
         binding.rvTemA.layoutManager = GridLayoutManager(requireContext(),2)
         binding.rvTemA.adapter = adapter
 

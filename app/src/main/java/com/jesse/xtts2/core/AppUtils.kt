@@ -13,7 +13,7 @@ object Victory {
     private var currentTemplate: Screen = Screen.A0
      var currentTitle  = "Title"
      var currentOptions= listOf("","")
-    private var currentGrammar= listOf("","")
+     private var currentGrammar= listOf("","")
 
     fun updateState(newUiState: UiVictoryState) {
      when(newUiState){
@@ -22,6 +22,7 @@ object Victory {
              currentTitle = newUiState.title
              currentTemplate = newUiState.template
              currentOptions = newUiState.options
+             currentGrammar = newUiState.options
          }
      }
 
@@ -33,7 +34,7 @@ object Victory {
         val countWords = words.size - 1
         return when (countWords) {
             1 -> {
-
+                Log.e("TAJ", "checkGrammar:  fue 1 $text", )
                 true
             }
 
