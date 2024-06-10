@@ -15,8 +15,8 @@ object Server {
     private fun checkInput(text: String): UiVictoryState? {
         isFree = false
         Log.d("TAJ", "checkInput: X$text,XX")
-        val response = when (text) {
-            "405 okay " -> {
+        val response = when (text.trim()) {
+            "405 okay" -> {
                 UiVictoryState.TemplateA0(Screen.A0,"Select a Task", listOf("Repack Pick","Cart Picking","Shubba","pizza","apple","whatever","lalssagna"))
             }
             else -> null
